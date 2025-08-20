@@ -1,6 +1,6 @@
 // src/lib/api.js
 const API_BASE =
-  (process.env.NEXT_PUBLIC_API_BASE || "http://127.0.0.1:8000").replace(/\/$/, "");
+  (process.env.NEXT_PUBLIC_API_BASE || "https://backend-vc-vpdemo-production.up.railway.app").replace(/\/$/, "");
 
 // ตั้งค่า path ผ่าน ENV ให้ยืดหยุ่นกับ prefix ใน FastAPI
 // ตัวอย่างค่าเริ่มต้นตามโค้ดแบ็กเอนด์ที่ include_router(prefix="/verifier")
