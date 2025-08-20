@@ -13,14 +13,11 @@ export default function Home() {
 
       <Section title="สรุประบบ">
         <div className="grid3">
-          <StatCard title="Issuer" desc="ออก VC / จัดการสคีมา / เพิกถอน" href="/issuer" />
-          <StatCard title="Holder" desc="กระเป๋าเอกสารดิจิทัล / แชร์เป็น VP" href="/holder" />
-          <StatCard title="Verifier" desc="สแกน/อัปโหลดเพื่อตรวจสอบ" href="/verifier" />
+          <StatCard title="Issuer" desc="ออก Verifiable Credential" href="/issuer" />
+          <StatCard title="Holder" desc="กระเป๋าเอกสารดิจิทัล (ยังไม่สามารถใช้งานได้)" href="/holder" />
+          <StatCard title="Verifier" desc="อัปโหลด JWT เพื่อตรวจสอบ" href="/verifier" />
+          <StatCard title="Registry" desc="Database (ยังไม่สามารถใช้งานได้)" href="/registry" />
         </div>
-      </Section>
-
-      <Section title="Registry">
-        <p>ค้นหาสคีมาและผู้ออกที่เชื่อถือได้ <a href="/registry">ดูทั้งหมด</a></p>
       </Section>
     </>
   );

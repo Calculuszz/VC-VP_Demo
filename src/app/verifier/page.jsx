@@ -78,7 +78,7 @@ export default function VerifierPage() {
       <Section title="ตรวจสอบเอกสาร">
         <form className="form" onSubmit={verify}>
           <label>
-            วางลิงก์ / JWT / JSON ที่มีฟิลด์ jwt
+            วาง JWT ที่ได้จาก Issuer 
             <input
               placeholder="เช่น eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCIsImtpZCI6IkRJRDo..."
               value={input}

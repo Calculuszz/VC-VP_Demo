@@ -17,7 +17,7 @@ export default function RegistryPage() {
 
   return (
     <>
-      <h1>Registry</h1>
+      <h1>Registry (Mock)</h1>
       <Section title="ค้นหา Registry">
         <input className="input" placeholder="พิมพ์เพื่อค้นหา..." value={q} onChange={e=>setQ(e.target.value)} />
         <div className="grid3">

@@ -52,12 +52,12 @@ export default function IssuerPage() {
       <Section title="ออกเอกสารรับรอง (VC)">
         <form className="form" onSubmit={submit}>
           <label>
-            Subject DID/ID
+            Subject DID
             <input
               required
               value={form.subjectId}
               onChange={(e) => setForm({ ...form, subjectId: e.target.value })}
-              placeholder="เช่น did:key:z6Mk... หรือ user123"
+              placeholder="เช่น did:key:z6Mk..."
             />
           </label>
 
