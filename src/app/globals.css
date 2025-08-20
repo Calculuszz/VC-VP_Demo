@@ -27,11 +27,6 @@ input,select,.input{width:100%;padding:10px 12px;border-radius:10px;border:1px s
 .footer{opacity:.7;text-align:center;padding:32px}
 @media (max-width:900px){ .grid3{grid-template-columns:1fr 1fr} }
 @media (max-width:600px){ .grid3,.grid2{grid-template-columns:1fr} }
-.vc-list {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 16px;
-}
 
 .vc-card {
   background-color: #f8f9fa;
@@ -67,3 +62,4 @@ input,select,.input{width:100%;padding:10px 12px;border-radius:10px;border:1px s
 .vc-card button:hover {
   background-color: #0056b3;
 }
+

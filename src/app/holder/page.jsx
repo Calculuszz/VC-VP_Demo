@@ -1,29 +1,43 @@
 "use client";
-import React, { useState, useEffect } from "react";
+
+import { useState, useEffect } from "react";
 import { getIssuedVCs } from "@/lib/api";
+import Section from "../../components/Section";
 import "../globals.css";
 
-const HolderPage = () => {
-  const [vcList, setVcList] = useState([]);
-  const [error, setError] = useState("");
+export default function HolderPage() {
+  const [vcList, setVcList] = useState([]); // รายการ VC ที่ดึงจาก API
+  const [loading, setLoading] = useState(false); // สถานะการโหลด
+  const [error, setError] = useState(""); // ข้อผิดพลาด
 
   useEffect(() => {
     const fetchVCs = async () => {
+      setLoading(true);
+      setError("");
       try {
-        const data = await getIssuedVCs();
-        setVcList(data);
+        const data = await getIssuedVCs(); // ดึงข้อมูล VC
+        setVcList(data); // ตั้งค่ารายการ VC
       } catch (err) {
-        setError("Error fetching VC list");
+        setError("Error fetching VC list.");
+      } finally {
+        setLoading(false); // เมื่อโหลดเสร็จหรือมีข้อผิดพลาดแล้ว
       }
     };
-    fetchVCs();
+    fetchVCs(); // เรียกใช้ฟังก์ชันดึงข้อมูล VC
   }, []);
 
   return (
-    <div>
+    <>
       <h1>Holder - List of Verifiable Credentials</h1>
-      {error && <p>{error}</p>}
-      <div className="vc-list">
+
+      <Section title="ข้อมูลบัตรยืนยันตัวตน (VC)">
+        {loading && <p>กำลังโหลด...</p>} {/* แสดงข้อความระหว่างการโหลด */}
+        {error && !loading && <p style={{ color: "red" }}>{error}</p>} {/* ข้อความข้อผิดพลาด */}
+
+        {vcList.length === 0 && !loading && !error && (
+          <p>ไม่มีบัตรยืนยันตัวตน (VC) ที่ได้รับ</p> // เมื่อไม่มีข้อมูล
+        )}
+
         {vcList.map((vc) => (
           <div key={vc.id} className="vc-card">
             <h2>{vc.schema}</h2>
@@ -35,10 +49,7 @@ const HolderPage = () => {
             </button>
           </div>
         ))}
-      </div>
-    </div>
+      </Section>
+    </>
   );
-};
-
-export default HolderPage;
-
+}
