@@ -61,3 +61,12 @@ export async function verifyCredential(jwtString) {
 
 // (ถ้าหน้าเดิม import ชื่อ verifyCredentialJWT อยู่ ให้ export alias ไว้)
 export const verifyCredentialJWT = verifyCredential;
+
+export async function getIssuedVCs() {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_BASE}/holder/credentials`, {
+    method: "GET",
+    headers: { "Content-Type": "application/json" },
+  });
+  if (!res.ok) throw new Error("Failed to fetch VC list");
+  return res.json();
+}

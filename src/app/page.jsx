@@ -6,12 +6,8 @@ export default function Home() {
     <>
       <header className="hero">
         <div className="hero__content">
-          <h1>Verifiable Credentials Platform</h1>
+          <h1>Simulate System VC & VP</h1>
           <p>โครงสร้างตัวอย่างสำหรับ Issuer / Holder / Verifier / Registry</p>
-          <div className="hero__cta">
-            <a className="btn" href="/issuer">เริ่มออกเอกสาร (Issuer)</a>
-            <a className="btn btn--ghost" href="/verifier">ตรวจเอกสาร (Verifier)</a>
-          </div>
         </div>
       </header>
 

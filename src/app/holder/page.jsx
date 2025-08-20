@@ -1,42 +1,44 @@
 "use client";
-import { useState } from "react";
-import Section from "../../components/Section";
-import QRCard from "../../components/QRCard";
+import React, { useState, useEffect } from "react";
+import { getIssuedVCs } from "@/lib/api";
+import "../globals.css";
 
-export default function HolderPage() {
-  const [wallet, setWallet] = useState([]);
-  const [shareId, setShareId] = useState(null);
+const HolderPage = () => {
+  const [vcList, setVcList] = useState([]);
+  const [error, setError] = useState("");
 
-  const importMock = () => {
-    const vc = { id: "vc_" + Math.random().toString(36).slice(2), schema: "HealthPass", status: "valid" };
-    setWallet([vc, ...wallet]);
-  };
-
-  const createShare = (vc) => {
-    const id = "vp_" + Math.random().toString(36).slice(2);
-    setShareId(id);
-  };
+  useEffect(() => {
+    const fetchVCs = async () => {
+      try {
+        const data = await getIssuedVCs();
+        setVcList(data);
+      } catch (err) {
+        setError("Error fetching VC list");
+      }
+    };
+    fetchVCs();
+  }, []);
 
   return (
-    <>
-      <h1>Holder (Wallet)</h1>
-      <Section title="กระเป๋าเอกสาร">
-        <button className="btn" onClick={importMock}>นำเข้า VC ตัวอย่าง</button>
-        <div className="grid2">
-          {wallet.map((vc) => (
-            <div key={vc.id} className="card">
-              <h3>{vc.schema}</h3>
-              <p>ID: {vc.id}</p>
-              <p>สถานะ: {vc.status}</p>
-              <button className="btn btn--small" onClick={() => createShare(vc)}>สร้างลิงก์/QR สำหรับแชร์</button>
-            </div>
-          ))}
-        </div>
-
-        {shareId && (
-          <QRCard title="ลิงก์แชร์ VP" value={`https://example.com/vp/${shareId}`} />
-        )}
-      </Section>
-    </>
+    <div>
+      <h1>Holder - List of Verifiable Credentials</h1>
+      {error && <p>{error}</p>}
+      <div className="vc-list">
+        {vcList.map((vc) => (
+          <div key={vc.id} className="vc-card">
+            <h2>{vc.schema}</h2>
+            <p><strong>Subject ID:</strong> {vc.subjectId}</p>
+            <p><strong>Expires at:</strong> {vc.expires}</p>
+            <p><strong>Status:</strong> {vc.status}</p>
+            <button onClick={() => alert(`Verifying VC with ID: ${vc.id}`)}>
+              Verify VC
+            </button>
+          </div>
+        ))}
+      </div>
+    </div>
   );
-}
+};
+
+export default HolderPage;
+
